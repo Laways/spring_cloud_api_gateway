@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    config:
+      discovery:
+        service-id: CONFIG
+        enabled: true
+      profile: dev
+zuul:
+  routes:
+    myProduct:
+      path: /myProduct/**
+      serviceId: product
+      sensitiveHeaders:
+#    简洁写法
+    order: /myOrder/**
+#    禁止某个地址的路由
+  ignored-patterns:
+    - /**/message/testProductMsg
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
